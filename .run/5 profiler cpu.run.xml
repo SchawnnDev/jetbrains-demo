@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="5 profiler cpu" type="GoApplicationRunConfiguration" factoryName="Go Application" folderName="4 debugger profiler">
+    <module name="jetbrains-demo" />
+    <working_directory value="$PROJECT_DIR$" />
+    <parameters value="5" />
+    <kind value="PACKAGE" />
+    <package value="jetbrains-demo/4_debugger_profiler" />
+    <directory value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
