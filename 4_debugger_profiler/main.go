@@ -65,8 +65,9 @@ func main() {
 		SimulerFuiteMemoire()
 
 	case 8:
-		fmt.Println("\n=== Démo 8: Comparaison de performance ===")
-		ComparePerformance()
+		fmt.Println("\n=== Démo 9: Attach to Process Debugger ===")
+		fmt.Println("Lancement d'un processus de longue durée pour démonstration de Attach to Process...")
+		LongRunningProcess()
 
 	case 0:
 		fmt.Println("\n=== Exécution de toutes les démos ===")
@@ -88,7 +89,7 @@ func afficherAide() {
 	fmt.Println("  5: Analyse de performances - Fonction lente (à utiliser avec CPU Profiler)")
 	fmt.Println("  6: Analyse de mémoire (à utiliser avec Memory Profiler)")
 	fmt.Println("  7: Simulation de fuite mémoire (à utiliser avec Memory Profiler)")
-	fmt.Println("  8: Comparaison de performance")
+	fmt.Println("  8: Attacher au débogueur de processus")
 	fmt.Println("  0: Exécuter toutes les démos")
 	fmt.Println("\nExemple: go run main.go 1")
 	fmt.Println("\nTIP: Pour utiliser le profiler, sélectionnez la configuration de démo correspondante,")

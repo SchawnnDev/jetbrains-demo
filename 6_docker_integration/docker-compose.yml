@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Service principal - notre application Go
+  app:
+    build:
+      context: ..
+      dockerfile: 6_docker_integration/Dockerfile
+    container_name: goland-demo-app
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - GO_ENV=development
+      - DEBUG=true
+    volumes:
+      # Pour le hot reload en développement (optionnel)
+      - ../6_docker_integration:/app/src
+    restart: unless-stopped
+    networks:
+      - goland-demo-network
+    # Permet d'utiliser le débogueur Delve depuis GoLand
+    security_opt:
+      - "seccomp:unconfined"
+    cap_add:
+      - SYS_PTRACE
+
+  # Base de données pour démonstration (PostgreSQL)
+  db:
+    image: postgres:16-alpine
+    container_name: goland-demo-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=goland
+      - POSTGRES_PASSWORD=demo
+      - POSTGRES_DB=jetbrains_demo
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - goland-demo-network
+
+  # Service Redis pour démonstration
+  cache:
+    image: redis:alpine
+    container_name: goland-demo-cache
+    ports:
+      - "6379:6379"
+    networks:
+      - goland-demo-network
+
+networks:
+  goland-demo-network:
+    name: goland-demo-net
+
+volumes:
+  pg_data:
+    name: goland-demo-pgdata
