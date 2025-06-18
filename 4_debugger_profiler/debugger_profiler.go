@@ -73,7 +73,36 @@ func ProcessArray(array []int) []int {
 	return result
 }
 
-// 4. Déboguer une goroutine
+// 4. Dépendance de points d'arrêt
+func TraitementSequentiel() {
+	// TIP: Cette fonction démontre les dépendances entre points d'arrêt
+	// Placez un premier point d'arrêt sur la ligne ci-dessous (Point d'arrêt A)
+	fmt.Println("Étape 1: Initialisation du traitement")
+
+	// Préparation des données
+	donnees := []int{10, 20, 30, 40, 50}
+
+	// TIP: Placez un second point d'arrêt ici (Point d'arrêt B)
+	// Puis cliquez-droit → Properties → Dépend de → Point d'arrêt A
+	// Ce point d'arrêt ne se déclenchera qu'après que le Point d'arrêt A ait été atteint
+	fmt.Println("Étape 2: Préparation des données terminée")
+
+	// Traitement par étapes
+	resultats := make([]int, 0, len(donnees))
+	for i, val := range donnees {
+		// TIP: Placez un troisième point d'arrêt ici (Point d'arrêt C)
+		// Configurez-le pour qu'il dépende du Point d'arrêt B
+		// et ajoutez une condition: i >= 2
+		// Le point d'arrêt ne se déclenchera que si i >= 2 ET après avoir atteint B
+		resultats = append(resultats, val*2)
+		fmt.Printf("Traitement de l'élément %d: %d → %d\n", i, val, resultats[i])
+	}
+
+	// Finalisation
+	fmt.Println("Traitement terminé. Résultats:", resultats)
+}
+
+// 5. Déboguer une goroutine
 func DeboguageGoroutines() {
 	// TIP: GoLand permet de déboguer facilement les goroutines
 	// Dans la fenêtre de débogage, vous pouvez voir toutes les goroutines
@@ -266,7 +295,10 @@ func DemonstrationDebuggingProfiling() {
 	resultatTableau := ProcessArray(tableau)
 	fmt.Printf("Tableau traité: %v\n", resultatTableau)
 
-	fmt.Println("\n4. Débogage de goroutines:")
+	fmt.Println("\n4. Dépendance de points d'arrêt:")
+	TraitementSequentiel()
+
+	fmt.Println("\n5. Débogage de goroutines:")
 	DeboguageGoroutines()
 
 	// Note: Pour le profiling, il est préférable de lancer séparément chaque fonction
@@ -277,6 +309,6 @@ func DemonstrationDebuggingProfiling() {
 	fmt.Println("- Run > Profile 'AnalyseMemoire' with Memory Profiler")
 	fmt.Println("- Run > Profile 'SimulerFuiteMemoire' with Memory Profiler")
 
-	fmt.Println("\n5. Comparaison de performance:")
+	fmt.Println("\n6. Comparaison de performance:")
 	ComparePerformance()
 }
